@@ -1,3 +1,4 @@
+import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth from "next-auth"
 import { ZodError } from "zod"
 import Credentials from "next-auth/providers/credentials"
@@ -5,19 +6,23 @@ import { signInSchema } from "./lib/zod"
 // Your own logic for dealing with plaintext password strings; be careful!
 import { saltAndHashPassword } from "@/utils/password"
 import { getUserFromDb } from "@/utils/db"
+import prisma from "@/utils/prisma"
 
-export const { handlers, auth } = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
+    adapter: PrismaAdapter(prisma),
     providers: [
         Credentials({
             // You can specify which fields should be submitted, by adding keys to the `credentials` object.
             // e.g. domain, username, password, 2FA token, etc.
             credentials: {
-                email: {},
-                password: {},
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
             },
             authorize: async (credentials) => {
                 try {
-                    let user = null
+                    if (!credentials?.email || !credentials.password){
+                        throw new Error("Email and password ")
+                    }
 
                     const { email, password } = await signInSchema.parseAsync(credentials)
 
