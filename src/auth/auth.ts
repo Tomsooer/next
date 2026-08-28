@@ -2,10 +2,10 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth from "next-auth"
 import { ZodError } from "zod"
 import Credentials from "next-auth/providers/credentials"
-import { signInSchema } from "./lib/zod"
+import { signInSchema } from "./lib/zod";
 // Your own logic for dealing with plaintext password strings; be careful!
-import { saltAndHashPassword } from "@/utils/password"
-import { getUserFromDb } from "@/utils/db"
+import { saltAndHashPassword } from "@/utils/password";
+import { getUserFromDb } from "@/utils/user"
 import prisma from "@/utils/prisma"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
