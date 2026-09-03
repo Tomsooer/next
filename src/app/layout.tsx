@@ -33,6 +33,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
         <Providers>
+            <SessionProvider></SessionProvider>
             <Header/>
             <main className={`flex flex-col w-full justify-start items-center`}
 
