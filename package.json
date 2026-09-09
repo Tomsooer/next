@@ -12,6 +12,7 @@
     "@auth/prisma-adapter": "^2.11.3",
     "@heroui/react": "2.8.10",
     "@prisma/extension-accelerate": "^3.0.1",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "next": "16.2.7",
     "next-auth": "^5.0.0-beta.32",
