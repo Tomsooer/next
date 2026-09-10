@@ -30,7 +30,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
 
                     const user = await getUserFromDb(email, pwHash)
 
-                    if (!user) {
+                    if (!user || !user.password) {
                         throw new Error("Invalid credentials.")
                     }
 
