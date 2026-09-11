@@ -9,6 +9,7 @@ import {layoutConfig} from "@/config/layout.config";
 import RegistrationModal from "@/components/UI/modals/registration.modal";
 import {useState} from "react";
 import LoginModal from "@/components/UI/modals/login.modal";
+import {singOutFunc} from "@/actions/sing-out";
 
 export const Logo = () => {
     return (
@@ -28,6 +29,10 @@ export default function Header() {
 
     const [isRegistrationOpen, setIsRestrationOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+    const handleSignOut = async () => {
+        await singOutFunc()
+    }
 
     const getNavItems = () => {
         return siteConfig.navItems.map((item) => {
@@ -72,8 +77,19 @@ export default function Header() {
                         color="primary"
                         href="#"
                         variant="flat"
+                        onPress={ handleSignOut }
+                    >
+                        Log out
+                    </Button>
+                </NavbarItem>
+                <NavbarItem className="hidden lg:flex">
+                    <Button
+                        as={Link}
+                        color="primary"
+                        href="#"
+                        variant="flat"
                         onPress={() => setIsLoginOpen(true)}
-                        >
+                    >
                         Login
                     </Button>
                 </NavbarItem>
@@ -84,7 +100,7 @@ export default function Header() {
                         href="#"
                         variant="flat"
                         onPress={() => setIsRestrationOpen(true)}
-                        >
+                    >
                         Sign Up
                     </Button>
 

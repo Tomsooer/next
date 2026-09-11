@@ -1,3 +1,5 @@
+import { signOut } from '@/auth/auth'
+
 export async function singOutFunc() {
     try {
         const result = await signOut({ redirect: false })
