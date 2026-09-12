@@ -2,13 +2,13 @@
 
 import React, {useState} from "react";
 import {Button, Form, Input} from "@heroui/react";
+import {singInWithCredentials} from "@/actions/sing-in";
 
 interface IProps {
     onClose: () => void;
 }
 
 const LoginForm = ({onClose}: IProps) => {
-
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -18,6 +18,9 @@ const LoginForm = ({onClose}: IProps) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted", formData);
+
+        const result = await singInWithCredentials(formData.email, formData.password);
+        console.log("result", result)
 
         onClose();
     }
