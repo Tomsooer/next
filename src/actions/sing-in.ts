@@ -1,3 +1,5 @@
+"use server"
+
 import { signIn } from '@/auth/auth';
 
 export async function singInWithCredentials(email: string, password: string) {
