@@ -78,6 +78,7 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
+                {isAuth && <p>Hi, { session?.user?.email}!</p>}
                 {!isAuth ?
                     <><NavbarItem className="hidden lg:flex">
                         <Button
@@ -101,20 +102,23 @@ export default function Header() {
                             Sign Up
                         </Button>
 
-                    </NavbarItem>
-                    </NavbarContent></>
+                    </NavbarItem></>
+                    : (
+                        <NavbarItem className="hidden lg:flex">
+                            <Button
+                                as={Link}
+                                color="secondary"
+                                href="#"
+                                variant="flat"
+                                onPress={handleSignOut}
+                            >
+                                Log out
+                            </Button>
+                        </NavbarItem>
+                    )
                 }
-                <NavbarItem className="hidden lg:flex">
-                    <Button
-                        as={Link}
-                        color="primary"
-                        href="#"
-                        variant="flat"
-                        onPress={ handleSignOut }
-                    >
-                        Log out
-                    </Button>
-                </NavbarItem>
+            </NavbarContent>
+
             <RegistrationModal
                 isOpen={isRegistrationOpen}
                 onClose={() => setIsRestrationOpen(false)}
