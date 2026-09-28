@@ -32,23 +32,21 @@ export default async function RootLayout({
     const session = await auth()
     return (
         <html lang="en">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
             <SessionProvider session={session}>
                 <Header/>
-                <main className={`flex flex-col w-full justify-start items-center`}
-
-                      style={{
-                          height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`
-                      }}
-
+                <main
+                    className={`flex flex-col w-full justify-start items-center`}
+                    style={{
+                        height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`
+                    }}
                 >
                     {children}
                 </main>
-                <footer className={` w-full flex justify-center items-center py-3`}
-                        style={{height: layoutConfig.footerHeight}}
+                <footer
+                    className={` w-full flex justify-center items-center py-3`}
+                    style={{height: layoutConfig.footerHeight}}
                 >
                     <p>{siteConfig.description}</p>
                 </footer>

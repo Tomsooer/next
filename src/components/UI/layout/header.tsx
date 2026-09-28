@@ -28,7 +28,7 @@ export const Logo = () => {
 export default function Header() {
     const pathname = usePathname();
 
-    const { isAuth, session, status, setAuthState } = useAuthStore();
+    const {isAuth, session, status, setAuthState} = useAuthStore();
 
     console.log("session", session);
     console.log("status", status);
@@ -39,9 +39,14 @@ export default function Header() {
     const handleSignOut = async () => {
         await singOutFunc()
 
-        
+        try {
+            await singOutFunc();
+        } catch (error) {
+            console.log("error", error);
+        }
 
-    }
+        setAuthState("unauthenticated", null);
+    };
 
     const getNavItems = () => {
         return siteConfig.navItems.map((item) => {
@@ -80,7 +85,7 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
-                {isAuth && <p>Hi, { session?.user?.email}!</p>}
+                {isAuth && <p>Hi, {session?.user?.email}!</p>}
                 {!isAuth ?
                     <><NavbarItem className="hidden lg:flex">
                         <Button
@@ -93,18 +98,18 @@ export default function Header() {
                             Login
                         </Button>
                     </NavbarItem>
-                    <NavbarItem>
-                        <Button
-                            as={Link}
-                            color="primary"
-                            href="#"
-                            variant="flat"
-                            onPress={() => setIsRestrationOpen(true)}
-                        >
-                            Sign Up
-                        </Button>
+                        <NavbarItem>
+                            <Button
+                                as={Link}
+                                color="primary"
+                                href="#"
+                                variant="flat"
+                                onPress={() => setIsRestrationOpen(true)}
+                            >
+                                Sign Up
+                            </Button>
 
-                    </NavbarItem></>
+                        </NavbarItem></>
                     : (
                         <NavbarItem className="hidden lg:flex">
                             <Button
