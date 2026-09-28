@@ -10,7 +10,7 @@ import RegistrationModal from "@/components/UI/modals/registration.modal";
 import {useState} from "react";
 import LoginModal from "@/components/UI/modals/login.modal";
 import {singOutFunc} from "@/actions/sing-out";
-import {useSession} from "next-auth/react";
+import {useAuthStore} from "@/schema/store/auth.store";
 
 export const Logo = () => {
     return (
@@ -27,9 +27,8 @@ export const Logo = () => {
 
 export default function Header() {
     const pathname = usePathname();
-    const { data: session, status } = useSession();
 
-    const isAuth = status === "authenticated";
+    const { isAuth, session, status, setAuthState } = useAuthStore();
 
     console.log("session", session);
     console.log("status", status);
@@ -39,6 +38,9 @@ export default function Header() {
 
     const handleSignOut = async () => {
         await singOutFunc()
+
+        
+
     }
 
     const getNavItems = () => {
