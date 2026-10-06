@@ -11,9 +11,11 @@ interface IProps {
 const AppLoader = ({children}: IProps) => {
     const {data: session, status} = useSession();
     const {setAuthState} = useAuthStore();
+    console.log('AAA: ', session, status)
 
     useEffect(() => {
         setAuthState(status, session);
+        console.log('BBB: ', session, status)
     }, [status, session, setAuthState]);
 
     return <>{children}</>;

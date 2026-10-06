@@ -11,6 +11,7 @@ import {useState} from "react";
 import LoginModal from "@/components/UI/modals/login.modal";
 import {singOutFunc} from "@/actions/sing-out";
 import {useAuthStore} from "@/schema/store/auth.store";
+import {useSession} from "next-auth/react";
 
 export const Logo = () => {
     return (
@@ -27,18 +28,17 @@ export const Logo = () => {
 
 export default function Header() {
     const pathname = usePathname();
-
-    const {isAuth, session, status, setAuthState} = useAuthStore();
+    const {data: session, status} = useSession();
+    const isAuth = status === "authenticated";
 
     console.log("session", session);
     console.log("status", status);
+    console.log("isAuth", isAuth);
 
     const [isRegistrationOpen, setIsRestrationOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
 
     const handleSignOut = async () => {
-        await singOutFunc()
-
         try {
             await singOutFunc();
         } catch (error) {
@@ -87,17 +87,18 @@ export default function Header() {
             <NavbarContent justify="end">
                 {isAuth && <p>Hi, {session?.user?.email}!</p>}
                 {!isAuth ?
-                    <><NavbarItem className="hidden lg:flex">
-                        <Button
-                            as={Link}
-                            color="primary"
-                            href="#"
-                            variant="flat"
-                            onPress={() => setIsLoginOpen(true)}
-                        >
-                            Login
-                        </Button>
-                    </NavbarItem>
+                    <>
+                        <NavbarItem className="hidden lg:flex">
+                            <Button
+                                as={Link}
+                                color="primary"
+                                href="#"
+                                variant="flat"
+                                onPress={() => setIsLoginOpen(true)}
+                            >
+                                Login
+                            </Button>
+                        </NavbarItem>
                         <NavbarItem>
                             <Button
                                 as={Link}
@@ -109,7 +110,8 @@ export default function Header() {
                                 Sign Up
                             </Button>
 
-                        </NavbarItem></>
+                        </NavbarItem>
+                    </>
                     : (
                         <NavbarItem className="hidden lg:flex">
                             <Button
@@ -130,7 +132,7 @@ export default function Header() {
                 isOpen={isRegistrationOpen}
                 onClose={() => setIsRestrationOpen(false)}
             />
-            <LoginModal isOpen={isLoginOpen} onClose={() => setIsRestrationOpen(false)}></LoginModal>
+            <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}></LoginModal>
         </Navbar>
     );
 }

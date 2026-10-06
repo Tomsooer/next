@@ -21,7 +21,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
                 try {
 
                     if (!credentials?.email || !credentials?.password) {
-                        throw new Error("Email");
+                        throw new Error("Email and password are required");
                     }
 
                     const {email, password} = await signInSchema.parseAsync(
@@ -57,7 +57,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
         strategy: "jwt",
         maxAge: 3600
     },
-    secret: process.env.NEXTAUTH_SENTER,
+    secret: process.env.BETTER_AUTH_SECRET,
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
