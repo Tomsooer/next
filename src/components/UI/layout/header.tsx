@@ -57,12 +57,12 @@ export default function Header() {
                         color="foreground"
                         href={item.href}
                         className={`px-3 py-1
-                            ${isActive ? "text-blue-500" : "text-foreground"}
-                            hover:text-blue-300 hover:border
-                            hover;border-blue-300 hover:rounded-md
-                            transition-colors
-                            transition-border
-                            duration-200`}
+                          ${isActive ? "text-blue-500" : "text-foreground"}
+                          hover:text-blue-300 hover:border
+                          hover;border-blue-300 hover:rounded-md
+                          transition-colors
+                          transition-border
+                          duration-200`}
                     >
                         {item.label}
                     </Link>
@@ -82,53 +82,55 @@ export default function Header() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 {getNavItems()}
-            </NavbarContent>`
-             
-                (<NavbarContent justify="end">
-                        {isAuth && <p>Hi, {session?.user?.email}!</p>}
-                        {status === "loading" ? !isAuth ? (
-                                <>
-                                    <NavbarItem className="hidden lg:flex">
-                                        <Button
-                                            as={Link}
-                                            color="primary"
-                                            href="#"
-                                            variant="flat"
-                                            onPress={() => setIsLoginOpen(true)}
-                                        >
-                                            Login
-                                        </Button>
-                                    </NavbarItem>
-                                    <NavbarItem>
-                                        <Button
-                                            as={Link}
-                                            color="primary"
-                                            href="#"
-                                            variant="flat"
-                                            onPress={() => setIsRestrationOpen(true)}
-                                        >
-                                            Sign Up
-                                        </Button>
+            </NavbarContent>
 
-                                    </NavbarItem>
-                                </>)
-                            : (
-                                <NavbarItem className="hidden lg:flex">
-                                    <Button
-                                        as={Link}
-                                        color="secondary"
-                                        href="#"
-                                        variant="flat"
-                                        onPress={handleSignOut}
-                                    >
-                                        Log out
-                                    </Button>
-                                </NavbarItem>
-                            )
-                        }
-                    </NavbarContent>
-                )
+            {<NavbarContent justify="end">
+                {isAuth && <p>Hi, {session?.user?.email}!</p>}
+                {status === "loading" ? (
+                    <p>loading...</p>
+                ) : !isAuth ? (
+                        <>
+                            <NavbarItem className="hidden lg:flex">
+                                <Button
+                                    as={Link}
+                                    color="primary"
+                                    href="#"
+                                    variant="flat"
+                                    onPress={() => setIsLoginOpen(true)}
+                                >
+                                    Login
+                                </Button>
+                            </NavbarItem>
+                            <NavbarItem>
+                                <Button
+                                    as={Link}
+                                    color="primary"
+                                    href="#"
+                                    variant="flat"
+                                    onPress={() => setIsRestrationOpen(true)}
+                                >
+                                    Sign Up
+                                </Button>
+
+                            </NavbarItem>
+                        </>)
+                    : (
+                        <NavbarItem className="hidden lg:flex">
+                            <Button
+                                as={Link}
+                                color="secondary"
+                                href="#"
+                                variant="flat"
+                                onPress={handleSignOut}
+                            >
+                                Log out
+                            </Button>
+                        </NavbarItem>
+                    )
+                }
+            </NavbarContent>
             }
+
 
             < RegistrationModal
                 isOpen={isRegistrationOpen}
