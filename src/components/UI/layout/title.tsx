@@ -15,7 +15,7 @@ const Title = () => {
 
     return (
         <div className="w-full flex justify-center mt-6 mb-12">
-            <h1 className="text-3x1 font-bolt">{pageTitle}</h1>
+            <h1 className="text-3xl font-bolt">{pageTitle}</h1>
         </div>
     );
 }
