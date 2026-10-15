@@ -13,7 +13,7 @@ const PageContent = () => {
        return <div>Page not found</div>;
    }
 
-   return <p>{pageContent.content}</p>
+   return <div dangerouslySetInnerHTML={{ __html: pageContent.content }} />
 };
 
 export default PageContent;

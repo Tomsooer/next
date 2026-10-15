@@ -28,23 +28,23 @@ export const siteConfig = {
             <ul>
                 <li>
                     <strong>Echpochmak</strong> - Triangular cakes with a filling of ground meat, 
-                    potatoes, and bake. A portion of pastries in the middle adds bouillonю
+                    potatoes, and bake. A portion of pastries in the middle adds bouillon.
                 </li> 
                 <li>
                     <strong>Belyash</strong> - Large pie with duck, beef or chicken mixed with
                      potatoes and onions. A festive dish.
                 </li> 
                 <li>
-                    <strong>Echpochmak</strong> - Triangular cakes with a filling of ground meat, 
-                    potatoes, and bake. A portion of pastries in the middle adds bouillonю
+                    <strong>Сhak-chak</strong> - Baked into honey, the balls of the dough.
+                     A tadicyone treat at celebrations.
                 </li> 
                 <li>
-                    <strong>Echpochmak</strong> - Triangular cakes with a filling of ground meat, 
-                    potatoes, and bake. A portion of pastries in the middle adds bouillonю
+                    <strong>Kzyblis</strong> - Thin dumplings topped with 
+                    mashed potatoes or wheatgrass.
                 </li> 
                 <li>
-                    <strong>Echpochmak</strong> - Triangular cakes with a filling of ground meat, 
-                    potatoes, and bake. A portion of pastries in the middle adds bouillonю
+                    <strong>Shulpa</strong> - Buttery soup with meat,
+                     potato fillets and homemade noodles.
                 </li>
             </ul>
             
