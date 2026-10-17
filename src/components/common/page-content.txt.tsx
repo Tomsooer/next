@@ -1,5 +1,6 @@
 "use client"
-
+import parse from "html-react-parser";
+import DOMPurify from "dompurify";
 import {usePathname} from "next/navigation";
 import {siteConfig} from "@/config/site.config";
 
