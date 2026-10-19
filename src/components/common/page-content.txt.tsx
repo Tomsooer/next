@@ -1,8 +1,8 @@
 "use client"
-import parse from "html-react-parser";
-import DOMPurify from "dompurify";
 import {usePathname} from "next/navigation";
 import {siteConfig} from "@/config/site.config";
+// import DOMPurify from "isomorphic-dompurify";
+// import parse from "html-react-parser";
 
 
 const PageContent = () => {

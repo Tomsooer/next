@@ -22,8 +22,11 @@ export const siteConfig = {
             rich history and hospitality of the Tatar people.
             </p>
             
+            <br/>
+            
             <h2>The main dishes of Tatar cuisine</h2>
             
+            <br/>
             
             <ul>
                 <li>
