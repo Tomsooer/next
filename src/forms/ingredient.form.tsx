@@ -1,5 +1,7 @@
+"use client"
+
 import React, {useState} from "react";
-import {Form, Input, Select, SelectItem} from "@heroui/react";
+import {Button, Form, Input, Select, SelectItem} from "@heroui/react";
 import {CATEGORY_OPTIONS, UNIT_OPTIONS} from "@/constants/select-options";
 
 const IngredientForm = () => {
@@ -8,16 +10,16 @@ const IngredientForm = () => {
         category: "",
         unit: "",
         pricePerUnit: null as number | null,
-        deskription: ""
+        description: ""
     });
 
-    const hadleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted:", formData);
     };
 
     return (
-        <Form className="w-[400px]" onSubmit={hadleSubmit}>
+        <Form className="w-[400px]" onSubmit={handleSubmit}>
             <Input
                 isRequired
                 name="name"
@@ -52,7 +54,7 @@ const IngredientForm = () => {
                         onChange={(e) => setFormData({...formData, category: e.target.value})}
                     >
                         {CATEGORY_OPTIONS.map((options) => (
-                            <SelectItem key={options.value} className="text-blank">
+                            <SelectItem key={options.value} className="text-black">
                                 {options.label}
                             </SelectItem>
                         ))}
@@ -73,14 +75,13 @@ const IngredientForm = () => {
                         onChange={(e) => setFormData({...formData, category: e.target.value})}
                     >
                         {UNIT_OPTIONS.map((options) => (
-                            <SelectItem key={options.value} className="text-blank">
+                            <SelectItem key={options.value} className="text-black">
                                 {options.label}
                             </SelectItem>
                         ))}
                     </Select>
 
                 </div>
-
                 <div className="w-1/3">
                     <Input
                         isRequired
@@ -93,15 +94,15 @@ const IngredientForm = () => {
                                 : ""
                         }
                         classNames={{
-                            inputWrapper: "bg-deafault-100",
+                            inputWrapper: "bg-default-100",
                             input: "text-sm focus:outline-none"
                         }}
                         onChange={(e) => {
-                        const value = e.target.value ? parseFloat(e.target.value) : null;
-                        setFormData({ ...formData, pricePerUnit: value });
+                            const value = e.target.value ? parseFloat(e.target.value) : null;
+                            setFormData({...formData, pricePerUnit: value});
                         }}
                         endContent={
-                        <span className="absolute right-3 top-1/2 transform -translate-y-1/2" >
+                        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black">
                             $
                         </span>
                         }
@@ -111,10 +112,29 @@ const IngredientForm = () => {
                             if (isNaN(num) || num < 0)
                                 return "The price must be positive";
                             return null;
-                    }}
+                        }}
                     />
                 </div>
+            </div>
 
+            <Input
+                name="description"
+                placeholder="Enter a description (optional)"
+                type="text"
+                value={formData.description}
+                classNames={{
+                    inputWrapper: "bg-default-100",
+                    input: "text-sm focus:outline-none"
+                }}
+                onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                }
+            />
+
+            <div className="flex w-full items-center justify-end">
+                <Button color="primary" type="submit">
+                    Add Ingredient
+                </Button>
             </div>
         </Form>
     )
