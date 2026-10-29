@@ -72,7 +72,7 @@ const IngredientForm = () => {
                             value: "truncate",
                             selectorIcon: "text-black"
                         }}
-                        onChange={(e) => setFormData({...formData, category: e.target.value})}
+                        onChange={(e) => setFormData({...formData, unit: e.target.value})}
                     >
                         {UNIT_OPTIONS.map((options) => (
                             <SelectItem key={options.value} className="text-black">
