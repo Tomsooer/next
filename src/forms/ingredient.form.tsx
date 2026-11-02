@@ -1,8 +1,9 @@
 "use client"
 
-import React, {useState} from "react";
+import { createIngredient } from '@/actions/ingredient';
 import {Button, Form, Input, Select, SelectItem} from "@heroui/react";
 import {CATEGORY_OPTIONS, UNIT_OPTIONS} from "@/constants/select-options";
+import {useState} from "react";
 
 const IngredientForm = () => {
     const [formData, setFormData] = useState({
@@ -16,6 +17,8 @@ const IngredientForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted:", formData);
+
+        await createIngredient(formData);
     };
 
     return (
