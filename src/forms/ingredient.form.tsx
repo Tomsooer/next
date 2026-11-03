@@ -14,15 +14,14 @@ const IngredientForm = () => {
         description: ""
     });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (formData: FormData) => {
         console.log("Form submitted:", formData);
 
         await createIngredient(formData);
     };
 
     return (
-        <Form className="w-[400px]" onSubmit={handleSubmit}>
+        <Form className="w-[400px]" action={handleSubmit}>
             <Input
                 isRequired
                 name="name"
