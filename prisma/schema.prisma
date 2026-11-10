@@ -66,15 +66,15 @@ model Ingredient {
   name         String
   categoty     Category
   unit         Unit
-  prisePerUnit Float?
-  description  String
+  pricePerUnit Float?
+  description  String?
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
   @@map("ingredients")
 }
 
-enum Cateory {
+enum Category {
   VEGETABLES
   FRUITS
   MEAT

@@ -2,6 +2,7 @@
 
 import prisma from "@/utils/prisma";
 import {ingredientSchema} from "@/schema/zod";
+import {ZodError} from "zod";
 
 export async function createIngredient(formData: FormData) {
     try {
@@ -32,7 +33,7 @@ export async function createIngredient(formData: FormData) {
         return { success: true, ingredient };
     } catch (error) {
         if (error instanceof ZodError) {
-            return { error: error.errors.map((e) => e.message).join(", ") };
+            return { error: error.issues.map((e) => e.message).join(", ") };
         }
         console.error("Error creating ingredient:", error);
         return { error: "Error while creating ingredient" };
