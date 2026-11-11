@@ -1,27 +1,57 @@
 "use client"
 
-import { createIngredient } from '@/actions/ingredient';
+import {createIngredient} from '@/actions/ingredient';
 import {Button, Form, Input, Select, SelectItem} from "@heroui/react";
 import {CATEGORY_OPTIONS, UNIT_OPTIONS} from "@/constants/select-options";
 import {useState} from "react";
 
+const initialState = {
+    name: "",
+    category: "",
+    unit: "",
+    pricePerUnit: null as number | null,
+    description: ""
+};
+
 const IngredientForm = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        category: "",
-        unit: "",
-        pricePerUnit: null as number | null,
-        description: ""
-    });
+    const [error, setError] = useState<string | null>(null)
+    const [formData, setFormData] = useState(initialState);
+
+    const [isPending, startTransition] = useTransition();
 
     const handleSubmit = async (formData: FormData) => {
         console.log("Form submitted:", formData);
+        startTransition(async () => {
+            const result = await createIngredient(formData);
 
-        await createIngredient(formData);
+            if (result.error) {
+                setError(result.error);
+                alert("Error creating ingredient")
+            } else {
+                setError(null)
+                setFormData(initialState);
+                alert("Successful creation of ingredient")
+            }
+        });
     };
+
+//     startTransition(async () => {
+//         const result = await createIngredient(formData);
+//
+//         if (result.error) {
+//             setError(result.error);
+//         } else {
+//             setError(null);
+//
+//             setFormData(initialState);
+//         }
+//     });
+// };
 
     return (
         <Form className="w-[400px]" action={handleSubmit}>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+
             <Input
                 isRequired
                 name="name"
@@ -104,7 +134,7 @@ const IngredientForm = () => {
                             setFormData({...formData, pricePerUnit: value});
                         }}
                         endContent={
-                        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black">
+                            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black">
                             $
                         </span>
                         }
@@ -129,12 +159,12 @@ const IngredientForm = () => {
                     input: "text-sm focus:outline-none"
                 }}
                 onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
+                    setFormData({...formData, description: e.target.value})
                 }
             />
 
             <div className="flex w-full items-center justify-end">
-                <Button color="primary" type="submit">
+                <Button color="primary" type="submit" isLoading={isPending}>
                     Add Ingredient
                 </Button>
             </div>
