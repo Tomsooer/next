@@ -39,3 +39,25 @@ export async function createIngredient(formData: FormData) {
         return { error: "Error while creating ingredient" };
     }
 }
+
+export async function getIngredients() {
+    try {
+        const ingredients = await prisma.ingredient.findMany();
+        return { success: true, ingredients };
+    } catch (error) {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
