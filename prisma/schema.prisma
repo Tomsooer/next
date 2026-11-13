@@ -64,7 +64,7 @@ model VerificationToken {
 model Ingredient {
   id           String   @id @default(uuid())
   name         String
-  categoty     Category
+  category     Category
   unit         Unit
   pricePerUnit Float?
   description  String?

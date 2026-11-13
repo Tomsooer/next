@@ -3,7 +3,7 @@
 import {createIngredient} from '@/actions/ingredient';
 import {Button, Form, Input, Select, SelectItem} from "@heroui/react";
 import {CATEGORY_OPTIONS, UNIT_OPTIONS} from "@/constants/select-options";
-import {useState} from "react";
+import {useState, useTransition} from "react";
 
 const initialState = {
     name: "",
@@ -34,19 +34,6 @@ const IngredientForm = () => {
             }
         });
     };
-
-//     startTransition(async () => {
-//         const result = await createIngredient(formData);
-//
-//         if (result.error) {
-//             setError(result.error);
-//         } else {
-//             setError(null);
-//
-//             setFormData(initialState);
-//         }
-//     });
-// };
 
     return (
         <Form className="w-[400px]" action={handleSubmit}>
@@ -117,7 +104,7 @@ const IngredientForm = () => {
                 <div className="w-1/3">
                     <Input
                         isRequired
-                        name="prisePerUnit"
+                        name="pricePerUnit"
                         placeholder="Price"
                         type="number"
                         value={
